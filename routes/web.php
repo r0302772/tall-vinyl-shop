@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('contact', function () {
-    return 'Contact info';
+    return view('contact');
 });
 
 Route::middleware([
