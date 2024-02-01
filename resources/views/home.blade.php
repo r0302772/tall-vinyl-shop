@@ -1,5 +1,5 @@
 <x-vinylshop-layout>
-    <x-slot name="description">New description</x-slot>
+    <x-slot name="description">Welcome to the Vinyl Shop</x-slot>
     <x-slot name="title">Welcome to the Vinyl Shop</x-slot>
 
     <p>Welcome to the website of The Vinyl Shop, a large online store with lots of (classic) vinyl records.</p>
