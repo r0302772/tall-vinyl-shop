@@ -6,6 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="description" content="{{ $description ?? 'Welcome to the Vinyl Shop' }}">
     <title>The vinyl Shop: {{ $title ?? 'The Vinyl Shop' }}</title>
+    <x-layout.favicons/>
 </head>
 <body class="font-sans antialiased">
 <div class="flex flex-col space-y-4 min-h-screen text-gray-800 bg-gray-100">
