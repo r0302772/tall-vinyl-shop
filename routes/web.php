@@ -19,8 +19,8 @@ Route::view('contact', 'contact');
 
 Route::get('admin/records', function (){
     $records = [
-        'Queen - Greatest Hits',
-        'The Rolling Stones - Sticky Fingers',
+        'Queen - <b>Greatest Hits</b>',
+        'The Rolling Stones - <em>Sticky Fingers</em>',
         'The Beatles - Abbey Road'
     ];
 
