@@ -17,9 +17,7 @@ Route::get('/', function () {
     return 'The Vinyl Shop';
 });
 
-Route::get('contact', function () {
-    return view('contact');
-});
+Route::view('contact', 'contact');
 
 Route::middleware([
     'auth:sanctum',
