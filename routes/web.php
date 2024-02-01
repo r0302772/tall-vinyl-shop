@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'home');
+Route::view('/', 'home')->name('home');;
 
-Route::view('contact', 'contact');
+Route::view('contact', 'contact')->name('contact');;
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::redirect('/', '/admin/records');
     Route::get('records', function () {
         $records = [
@@ -29,7 +29,7 @@ Route::prefix('admin')->group(function () {
         return view('admin.records.index', [
             'records' => $records
         ]);
-    });
+    })->name('records');
 });
 
 Route::middleware([
