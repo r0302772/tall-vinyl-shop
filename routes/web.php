@@ -17,16 +17,19 @@ Route::view('/', 'home');
 
 Route::view('contact', 'contact');
 
-Route::get('admin/records', function (){
-    $records = [
-        'Queen - <b>Greatest Hits</b>',
-        'The Rolling Stones - <em>Sticky Fingers</em>',
-        'The Beatles - Abbey Road'
-    ];
+Route::prefix('admin')->group(function () {
+    Route::redirect('/', '/admin/records');
+    Route::get('records', function () {
+        $records = [
+            'Queen - <b>Greatest Hits</b>',
+            'The Rolling Stones - <em>Sticky Fingers</em>',
+            'The Beatles - Abbey Road'
+        ];
 
-    return view('admin.records.index', [
-        'records' => $records
-    ]);
+        return view('admin.records.index', [
+            'records' => $records
+        ]);
+    });
 });
 
 Route::middleware([
