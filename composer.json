@@ -10,6 +10,7 @@
         "codeat3/blade-phosphor-icons": "^2.0",
         "codeat3/blade-simple-icons": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
+        "intervention/image": "^2",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
