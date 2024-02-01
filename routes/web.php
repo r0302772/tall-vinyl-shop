@@ -17,6 +17,10 @@ Route::view('/', 'home');
 
 Route::view('contact', 'contact');
 
+Route::get('admin/records', function (){
+    return view('admin.records.index');
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
