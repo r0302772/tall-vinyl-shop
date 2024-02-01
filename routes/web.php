@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'The Vinyl Shop';
+});
+
+Route::get('contact', function () {
+    return 'Contact info';
 });
 
 Route::middleware([
