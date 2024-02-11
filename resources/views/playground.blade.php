@@ -42,4 +42,24 @@
         <x-tmk.preloader class="bg-green-100 text-green-700 border border-green-700"/>
         <x-tmk.preloader class="bg-slate-600 text-white italic w-1/2">Loading records...</x-tmk.preloader>
     </section>
+
+    <section class="my-4">
+        <h2>Alerts</h2>
+        <x-tmk.alert>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis dolores dolorum error eum eveniet
+            exercitationem expedita, impedit itaque laudantium, natus, nobis numquam omnis praesentium quis reiciendis
+            soluta sunt vel vero.
+        </x-tmk.alert>
+        <x-tmk.alert type="danger" class="mt-8 shadow-xl">
+            lorem ipsum
+        </x-tmk.alert>
+        <x-tmk.alert type="info" class="mt-8">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus eligendi facilis libero maiores non,
+            praesentium quam reiciendis sunt ut voluptatibus.
+        </x-tmk.alert>
+        <x-tmk.alert type="warning" dismissible="false" close-self="5000">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus eligendi facilis libero maiores non,
+            praesentium quam reiciendis sunt ut voluptatibus.
+        </x-tmk.alert>
+    </section>
 </x-vinylshop-layout>
