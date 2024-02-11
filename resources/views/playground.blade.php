@@ -79,4 +79,52 @@
                                text-on="😊" text-off="😩"/>
         </div>
     </section>
+
+    <h2>Form</h2>
+    <form class="grid grid-cols-10 gap-4">
+        {{-- text input --}}
+        <div class="col-span-10 sm:col-span-5">
+            <x-label for="name" value="Name"/>
+            <x-input id="name" type="text" class="block mt-1 w-full" placeholder="Your name"/>
+        </div>
+        {{-- select --}}
+        <div class="col-span-10 sm:col-span-5">
+            <x-label for="country" value="Select a country"/>
+            <x-tmk.form.select id="country" type="text" class="block mt-1 w-full">
+                <option value="Belgium">Belgium</option>
+                <option value="France">France</option>
+                <option value="Germany">Germany</option>
+            </x-tmk.form.select>
+        </div>
+        {{-- textarea --}}
+        <div class="col-span-10">
+            <x-label for="message" value="Message"/>
+            <x-tmk.form.textarea id="message" class="block mt-1 w-full" rows="6" placeholder="Your message">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, corporis!
+            </x-tmk.form.textarea>
+        </div>
+    </form>
+
+    <h2>Buttons</h2>
+    <section class="flex space-x-4">
+        <x-tmk.form.button type="button">default button</x-tmk.form.button>
+        <x-tmk.form.button type="button" color="success">success button</x-tmk.form.button>
+        <x-tmk.form.button type="button" color="danger">danger button</x-tmk.form.button>
+        <x-tmk.form.button type="button" color="info">info button</x-tmk.form.button>
+    </section>
+
+    <h2>Disabled buttons</h2>
+    <section class="flex space-x-4">
+        <x-tmk.form.button type="button" disabled>default button</x-tmk.form.button>
+        <x-tmk.form.button type="button" color="success" disabled>success button</x-tmk.form.button>
+        <x-tmk.form.button type="button" color="danger" disabled>danger button</x-tmk.form.button>
+        <x-tmk.form.button type="button" color="info" disabled>info button</x-tmk.form.button>
+    </section>
+
+    <h2>Vinyl Shop logo</h2>
+    <section class="flex items-start space-x-4">
+        <x-tmk.logo class="w-12"/>
+        <x-tmk.logo class="w-24 fill-cyan-700"/>
+        <x-tmk.logo class="w-40 fill-neutral-600 hover:w-48 hover:fill-orange-700 hover:drop-shadow-lg transition"/>
+    </section>
 </x-vinylshop-layout>
