@@ -35,4 +35,11 @@
             </div>
         </div>
     </section>
+
+    <section class="my-4">
+        <h2>Preloader</h2>
+        <x-tmk.preloader class="px-0"/>
+        <x-tmk.preloader class="bg-green-100 text-green-700 border border-green-700"/>
+        <x-tmk.preloader class="bg-slate-600 text-white italic w-1/2">Loading records...</x-tmk.preloader>
+    </section>
 </x-vinylshop-layout>
