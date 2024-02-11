@@ -62,4 +62,21 @@
             praesentium quam reiciendis sunt ut voluptatibus.
         </x-tmk.alert>
     </section>
+
+    <section class="my-4">
+        <h2>Switch</h2>
+        <div class="flex items-center gap-4">
+            <x-tmk.form.switch/>
+            <x-tmk.form.switch checked color-off="bg-red-200"/>
+            <x-tmk.form.switch disabled/>
+            <x-tmk.form.switch checked name="save" value="Save me"
+                               class="text-white shadow-lg !rounded-full w-28"
+                               color-off="bg-orange-800" color-on="bg-sky-800"
+                               text-off="switch off" text-on="switch on"/>
+            <x-tmk.form.switch name="user" value="on"
+                               class="!h-20 !text-5xl"
+                               color-off="bg-red-200" color-on="bg-green-500"
+                               text-on="😊" text-off="😩"/>
+        </div>
+    </section>
 </x-vinylshop-layout>
