@@ -17,4 +17,22 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, quasi?</p>
         </x-tmk.section>
     </div>
+
+    <section class="my-4">
+        <h2>Blade UI kit Icons</h2>
+        <div class="flex gap-4 p-4 my-4 bg-white rounded border shadow">
+            <div class="w-6">
+                <x-fas-home/>
+            </div>
+            <div class="w-6 text-orange-600">
+                <x-icon name="fas-home"/>
+            </div>
+            <div class="w-6 text-green-600">
+                @svg('fas-home')
+            </div>
+            <div class="w-6 text-sky-600">
+                {{ svg('fas-home') }}
+            </div>
+        </div>
+    </section>
 </x-vinylshop-layout>
