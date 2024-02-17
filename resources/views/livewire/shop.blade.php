@@ -30,14 +30,16 @@
                     <div>{{ $record->price_euro }}</div>
                     <div class="flex space-x-4">
                         @if($record->stock > 0)
-                            <button class="w-6 hover:text-red-900">
-                                <x-phosphor-shopping-bag-light/>
+                            <button class="w-6 hover:text-red-900"
+                                    data-tippy-content="Add to basket<br><span class='text-red-300'>NOT IMPLEMENTED YET</span>">
+                                <x-phosphor-shopping-bag-light class="outline-0" />
                             </button>
                         @else
                             <p class="font-extrabold text-red-700">SOLD OUT</p>
                         @endif
-                        <button class="w-6 hover:text-red-900">
-                            <x-phosphor-music-notes-light/>
+                        <button class="w-6 hover:text-red-900"
+                            data-tippy-content="Show tracks">
+                            <x-phosphor-music-notes-light class="outline-0" />
                         </button>
                     </div>
                 </div>
