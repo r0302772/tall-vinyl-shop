@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Genre;
 use App\Models\Record;
 use Http;
 use Livewire\Attributes\Layout;
@@ -14,6 +15,11 @@ class Shop extends Component
 
     // public properties
     public $perPage = 6;
+    public $name;
+    public $genre = '%';
+    public $price;
+    public $priceMin, $priceMax;
+
     public $loading = 'Please wait...';
     public $selectedRecord;
     public $showModal = false;
@@ -32,8 +38,30 @@ class Shop extends Component
     public function render()
     {
         // sleep(2);
+        $allGenres = Genre::has('records')->withCount('records')->get();
         $records = Record::orderBy('artist')
+            ->orderBy('title')
+            ->where([
+                ['title', 'like', "%{$this->name}%"],
+                ['genre_id', 'like', $this->genre],
+                ['price', '<=', $this->price]
+            ])
             ->paginate($this->perPage);
-        return view('livewire.shop', compact('records'));
+        return view('livewire.shop', compact('records', 'allGenres'));
+    }
+
+    public function updated($property, $value)
+    {
+        // $property: The name of the current property being updated
+        // $value: The value about to be set to the property
+        if (in_array($property, ['perPage', 'name', 'genre', 'price']))
+            $this->resetPage();
+    }
+
+    public function mount()
+    {
+        $this->priceMin = ceil(Record::min('price'));
+        $this->priceMax = ceil(Record::max('price'));
+        $this->price = $this->priceMax;
     }
 }

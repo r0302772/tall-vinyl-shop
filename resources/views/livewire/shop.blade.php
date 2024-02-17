@@ -14,6 +14,7 @@
             <div
                 class="relative">
                 <x-input id="name" type="text"
+                         wire:model.live.debounce.500ms="name"
                          class="block mt-1 w-full"
                          placeholder="Filter Artist Or Record"/>
                 <button
@@ -25,13 +26,20 @@
         <div class="col-span-5 md:col-span-2 lg:col-span-2">
             <x-label for="genre" value="Genre"/>
             <x-tmk.form.select id="genre"
+                               wire:model.live="genre"
                                class="block mt-1 w-full">
                 <option value="%">All Genres</option>
+                @foreach($allGenres as $g)
+                    <option value="{{ $g->id }}">
+                        {{ $g->name }} ({{$g->records_count}})
+                    </option>
+                @endforeach
             </x-tmk.form.select>
         </div>
         <div class="col-span-5 md:col-span-3 lg:col-span-2">
             <x-label for="perPage" value="Records per page"/>
             <x-tmk.form.select id="perPage"
+                               wire:model.live="perPage"
                                class="block mt-1 w-full">
                 @foreach ([3,6,9,12,15,18,24] as $value)
                     <option value="{{ $value }}">{{ $value }}</option>
@@ -40,11 +48,12 @@
         </div>
         <div class="col-span-10 lg:col-span-3">
             <x-label for="price">Price &le;
-                <output id="pricefilter" name="pricefilter"></output>
+                <output id="pricefilter" name="pricefilter">{{ $price }}</output>
             </x-label>
             <x-input type="range" id="price" name="price"
-                     min="0"
-                     max="100"
+                     wire:model.live="price"
+                     min="{{ $priceMin }}"
+                     max="{{ $priceMax }}"
                      oninput="pricefilter.value = price.value"
                      class="block mt-4 w-full h-2 bg-indigo-100 accent-indigo-600 appearance-none"/>
         </div>
