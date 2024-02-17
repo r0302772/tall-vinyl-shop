@@ -101,6 +101,13 @@
     </div>
     <div class="my-4">{{ $records->links() }}</div>
 
+    {{-- No records found --}}
+    @if($records->isEmpty())
+        <x-tmk.alert type="danger" class="w-full">
+            Can't find any artist or album with <b>'{{ $name }}'</b> for this genre
+        </x-tmk.alert>
+    @endif
+
     {{-- Detail section --}}
     <x-dialog-modal wire:model="showModal">
         <x-slot name="title">
