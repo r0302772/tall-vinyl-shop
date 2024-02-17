@@ -10,4 +10,10 @@ class Genre extends Model
     use HasFactory;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    // Relationship between models
+    public function records()
+    {
+        return $this->hasMany(Record::class);   // a genre has many "records"
+    }
 }
