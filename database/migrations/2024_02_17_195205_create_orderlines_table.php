@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('orderlines', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->string('artist');
+            $table->string('title');
+            $table->string('mb_id', 36)->unique();
+            $table->float('total_price', 6, 2);
+            $table->unsignedInteger('quantity');
             $table->timestamps();
         });
     }

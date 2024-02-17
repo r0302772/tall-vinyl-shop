@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('genre_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->string('artist');
+            $table->string('title');
+            $table->string('mb_id', 36)->unique();
+            $table->float('price', 5, 2)->default(19.99);
+            $table->unsignedInteger('stock')->default(1);
             $table->timestamps();
         });
     }
