@@ -13,10 +13,12 @@ class Shop extends Component
 
     // public properties
     public $perPage = 6;
+    public $loading = 'Please wait...';
 
     #[Layout('layouts.vinylshop', ['title' => 'Shop', 'description' => 'Welcome to our shop'])]
     public function render()
     {
+        sleep(2);
         $records = Record::orderBy('artist')
             ->paginate($this->perPage);
         return view('livewire.shop', compact('records'));

@@ -1,5 +1,11 @@
 <div>
     {{-- show preloader while fetching data in the background --}}
+    <div class="fixed top-8 left-1/2 -translate-x-1/2 z-50 animate-pulse"
+         wire:loading>
+        <x-tmk.preloader class="bg-lime-700/60 text-white border border-lime-700 shadow-2xl">
+            {{ $loading }}
+        </x-tmk.preloader>
+    </div>
 
     {{-- filter section: artist or title, genre, max price and records per page --}}
 
