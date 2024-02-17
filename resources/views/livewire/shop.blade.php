@@ -18,6 +18,7 @@
                          class="block mt-1 w-full"
                          placeholder="Filter Artist Or Record"/>
                 <button
+                    @click="$wire.set('name', '')"
                     class="w-5 absolute right-4 top-3">
                     <x-phosphor-x/>
                 </button>

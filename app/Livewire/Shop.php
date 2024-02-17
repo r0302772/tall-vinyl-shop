@@ -41,11 +41,9 @@ class Shop extends Component
         $allGenres = Genre::has('records')->withCount('records')->get();
         $records = Record::orderBy('artist')
             ->orderBy('title')
-            ->where([
-                ['title', 'like', "%{$this->name}%"],
-                ['genre_id', 'like', $this->genre],
-                ['price', '<=', $this->price]
-            ])
+            ->searchTitleOrArtist($this->name)
+            ->where('genre_id', 'like', $this->genre)
+            ->where('price', '<=', $this->price)
             ->paginate($this->perPage);
         return view('livewire.shop', compact('records', 'allGenres'));
     }
