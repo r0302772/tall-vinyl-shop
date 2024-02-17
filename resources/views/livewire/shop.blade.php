@@ -37,7 +37,8 @@
                         @else
                             <p class="font-extrabold text-red-700">SOLD OUT</p>
                         @endif
-                        <button class="w-6 hover:text-red-900"
+                        <button wire:click="showTracks({{ $record->id }})"
+                            class="w-6 hover:text-red-900"
                             data-tippy-content="Show tracks">
                             <x-phosphor-music-notes-light class="outline-0" />
                         </button>

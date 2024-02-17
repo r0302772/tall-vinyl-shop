@@ -14,6 +14,13 @@ class Shop extends Component
     // public properties
     public $perPage = 6;
     public $loading = 'Please wait...';
+    public $selectedRecord;
+
+    public function showTracks(Record $record)
+    {
+        $this->selectedRecord = $record;
+        dump($this->selectedRecord->toArray());
+    }
 
     #[Layout('layouts.vinylshop', ['title' => 'Shop', 'description' => 'Welcome to our shop'])]
     public function render()
