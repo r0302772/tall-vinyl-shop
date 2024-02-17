@@ -4,6 +4,7 @@
     {{-- filter section: artist or title, genre, max price and records per page --}}
 
     {{-- master section: cards with paginationlinks --}}
+    <div class="my-4">{{ $records->links() }}</div>
     <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8 mt-8">
         @foreach ($records as $record)
         <div
@@ -38,6 +39,7 @@
         </div>
         @endforeach
     </div>
+    <div class="my-4">{{ $records->links() }}</div>
 
     {{-- Detail section --}}
     <x-tmk.livewire-log :records="$records" />
