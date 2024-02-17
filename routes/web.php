@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Demo;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,17 +21,7 @@ Route::get('log-example',\App\Livewire\Log::class)->name('log-example');
 Route::view('under-construction', 'under-construction')->name('under-construction');
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::redirect('/', '/admin/records');
-    Route::get('records', function () {
-        $records = [
-            'Queen - <b>Greatest Hits</b>',
-            'The Rolling Stones - <em>Sticky Fingers</em>',
-            'The Beatles - Abbey Road'
-        ];
-
-        return view('admin.records.index', [
-            'records' => $records
-        ]);
-    })->name('records');
+    Route::get('records', Demo::class)->name('records');
 });
 
 Route::middleware([
