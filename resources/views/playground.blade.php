@@ -111,6 +111,7 @@
         <x-tmk.form.button type="button" color="success">success button</x-tmk.form.button>
         <x-tmk.form.button type="button" color="danger">danger button</x-tmk.form.button>
         <x-tmk.form.button type="button" color="info">info button</x-tmk.form.button>
+        <x-tmk.form.button type="button" data-tippy-content="I'm a Tippy tooltip!">Tippy tooltip button</x-tmk.form.button>
     </section>
 
     <h2>Disabled buttons</h2>
