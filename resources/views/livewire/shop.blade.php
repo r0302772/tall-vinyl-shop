@@ -5,8 +5,9 @@
 
     {{-- master section: cards with paginationlinks --}}
     <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8 mt-8">
-
+        @foreach ($records as $record)
         <div
+            wire:key="record-{{ $record->id }}"
             class="flex bg-white border border-gray-300 shadow-md rounded-lg overflow-hidden">
             <img class="w-52 h-52 border-r border-gray-300 object-cover"
                  src="{{ asset('storage/covers/no-cover.png') }}"
@@ -31,7 +32,7 @@
                 </div>
             </div>
         </div>
-
+        @endforeach
     </div>
 
     {{-- Detail section --}}
