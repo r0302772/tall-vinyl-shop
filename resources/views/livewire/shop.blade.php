@@ -8,6 +8,47 @@
     </div>
 
     {{-- filter section: artist or title, genre, max price and records per page --}}
+    <div class="grid grid-cols-10 gap-4">
+        <div class="col-span-10 md:col-span-5 lg:col-span-3">
+            <x-label for="name" value="Filter"/>
+            <div
+                class="relative">
+                <x-input id="name" type="text"
+                         class="block mt-1 w-full"
+                         placeholder="Filter Artist Or Record"/>
+                <button
+                    class="w-5 absolute right-4 top-3">
+                    <x-phosphor-x/>
+                </button>
+            </div>
+        </div>
+        <div class="col-span-5 md:col-span-2 lg:col-span-2">
+            <x-label for="genre" value="Genre"/>
+            <x-tmk.form.select id="genre"
+                               class="block mt-1 w-full">
+                <option value="%">All Genres</option>
+            </x-tmk.form.select>
+        </div>
+        <div class="col-span-5 md:col-span-3 lg:col-span-2">
+            <x-label for="perPage" value="Records per page"/>
+            <x-tmk.form.select id="perPage"
+                               class="block mt-1 w-full">
+                @foreach ([3,6,9,12,15,18,24] as $value)
+                    <option value="{{ $value }}">{{ $value }}</option>
+                @endforeach
+            </x-tmk.form.select>
+        </div>
+        <div class="col-span-10 lg:col-span-3">
+            <x-label for="price">Price &le;
+                <output id="pricefilter" name="pricefilter"></output>
+            </x-label>
+            <x-input type="range" id="price" name="price"
+                     min="0"
+                     max="100"
+                     oninput="pricefilter.value = price.value"
+                     class="block mt-4 w-full h-2 bg-indigo-100 accent-indigo-600 appearance-none"/>
+        </div>
+    </div>
 
     {{-- master section: cards with paginationlinks --}}
     <div class="my-4">{{ $records->links() }}</div>
