@@ -104,7 +104,12 @@
     {{-- No records found --}}
     @if($records->isEmpty())
         <x-tmk.alert type="danger" class="w-full">
-            Can't find any artist or album with <b>'{{ $name }}'</b> for this genre
+            Can't find any artist or album with
+            <b>'{{ $name }}'</b>
+            @if($genre !== '%')
+                for the genre <b>'{{$allGenres->where('id',$genre)->first()->name}}'</b>
+            @endif
+            and a price <b>'&le; € {{$price}}'</b>
         </x-tmk.alert>
     @endif
 
