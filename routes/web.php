@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Demo;
+use App\Livewire\Shop;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'home')->name('home');;
-Route::view('contact', 'contact')->name('contact');;
+Route::get('shop', Shop::class)->name('shop');
+Route::view('contact', 'contact')->name('contact');
 Route::view('playground', 'playground')->name('playground');
 Route::get('log-example',\App\Livewire\Log::class)->name('log-example');
 Route::view('under-construction', 'under-construction')->name('under-construction');
