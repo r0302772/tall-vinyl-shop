@@ -6,9 +6,12 @@ use App\Models\Genre;
 use App\Models\Record;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Demo extends Component
 {
+    use WithPagination;
+
     #[Layout('layouts.vinylshop', [
         'title' => 'Eloquent models',
         'subtitle' => 'Eloquent models: part 2',
@@ -17,10 +20,11 @@ class Demo extends Component
     public function render()
     {
         $maxPrice = 20;
+        $perPage = 8;
         $records = Record::orderBy('artist')
             ->orderBy('title')
-            ->maxPrice(20)
-            ->get();
+            ->maxPrice($maxPrice)
+            ->paginate($perPage);
         $genres = Genre::orderBy('name')
             ->with('records')
             ->get();
