@@ -11,6 +11,12 @@
         <x-nav-link href="{{ route('shop') }}" :active="request()->routeIs('shop')">
             Shop
         </x-nav-link>
+        <x-nav-link href="{{ route('playground') }}" :active="request()->routeIs('playground')">
+            Playground
+        </x-nav-link>
+        <x-nav-link href="{{ route('eloquent-models') }}" :active="request()->routeIs('eloquent-models')">
+            Eloquent Models
+        </x-nav-link>
         <x-dropdown align="left" width="48">
             <x-slot name="trigger">
                 <x-nav-link class="cursor-pointer">

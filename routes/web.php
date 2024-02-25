@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Admin\Genres;
+use App\Livewire\Admin\Records;
 use App\Livewire\Demo;
 use App\Livewire\ItunesAdvanced;
 use App\Livewire\ItunesBasic;
@@ -24,12 +25,13 @@ Route::get('itunes-basic', ItunesBasic::class)->name('itunes-basic');
 Route::get('itunes-advanced', ItunesAdvanced::class)->name('itunes-advanced');
 Route::view('contact', 'contact')->name('contact');
 Route::view('playground', 'playground')->name('playground');
+Route::get('eloquent-models', Demo::class)->name('eloquent-models');
 Route::get('log-example', \App\Livewire\Log::class)->name('log-example');
 Route::view('under-construction', 'under-construction')->name('under-construction');
 Route::middleware(['auth', 'admin', 'active'])->prefix('admin')->name('admin.')->group(function () {
     Route::redirect('/', '/admin/records');
     Route::get('genres', Genres::class)->name('genres');
-    Route::get('records', Demo::class)->name('records');
+    Route::get('records', Records::class)->name('records');
 });
 
 Route::middleware([
