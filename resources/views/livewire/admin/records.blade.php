@@ -3,20 +3,23 @@
     <x-tmk.section class="mb-4 flex gap-2">
         <div class="flex-1">
             <x-input id="search" type="text" placeholder="Filter Artist Or Record"
+                     wire:model.live.debounce.500ms="search"
                      class="w-full shadow-md placeholder-gray-300"/>
         </div>
         <x-tmk.form.switch id="noStock"
+                           wire:model.live="noStock"
                            text-off="No stock"
                            color-off="bg-gray-100 before:line-through"
                            text-on="No stock"
                            color-on="text-white bg-lime-600"
-                           class="w-20 h-auto" />
+                           class="w-20 h-auto"/>
         <x-tmk.form.switch id="noCover"
+                           wire:model.live="noCover"
                            text-off="Records without cover"
                            color-off="bg-gray-100 before:line-through"
                            text-on="Records without cover"
                            color-on="text-white bg-lime-600"
-                           class="w-44 h-auto" />
+                           class="w-44 h-auto"/>
         <x-button>
             new record
         </x-button>
@@ -24,6 +27,7 @@
 
     {{-- Table with records --}}
     <x-tmk.section>
+        <div class="my-4">{{ $records->links() }}</div>
         <table class="text-center w-full border border-gray-300">
             <colgroup>
                 <col class="w-14">
@@ -42,6 +46,7 @@
                 <th class="text-left">Record</th>
                 <th>
                     <x-tmk.form.select id="perPage"
+                                       wire:model.live="perPage"
                                        class="block mt-1 w-full">
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -52,31 +57,44 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="border-t border-gray-300">
-                <td>...</td>
-                <td>
-                    <img src="/storage/covers/no-cover.png"
-                         alt="no cover"
-                         class="my-2 border object-cover">
-                </td>
-                <td>...</td>
-                <td>...</td>
-                <td class="text-left">...</td>
-                <td>
-                    <div class="border border-gray-300 rounded-md overflow-hidden m-2 grid grid-cols-2 h-10">
-                        <button
-                            class="text-gray-400 hover:text-sky-100 hover:bg-sky-500 transition border-r border-gray-300">
-                            <x-phosphor-pencil-line-duotone class="inline-block w-5 h-5"/>
-                        </button>
-                        <button
-                            class="text-gray-400 hover:text-red-100 hover:bg-red-500 transition">
-                            <x-phosphor-trash-duotone class="inline-block w-5 h-5"/>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+            @forelse($records as $record)
+                <tr class="border-t border-gray-300">
+                    <td>{{ $record->id }}</td>
+                    <td>
+                        <img src="{{ $record->cover }}"
+                             alt="{{ $record->title }} by {{ $record->artist }}"
+                             class="my-2 border object-cover">
+                    </td>
+                    <td>{{ $record->price_euro }}</td>
+                    <td>{{ $record->stock }}</td>
+                    <td class="text-left">
+                        <p class="text-lg font-medium">{{ $record->artist }}</p>
+                        <p class="italic">{{ $record->title }}</p>
+                        <p class="text-sm text-teal-700">{{ $record->genre_name }}</p>
+                    </td>
+                    <td>
+                        <div class="border border-gray-300 rounded-md overflow-hidden m-2 grid grid-cols-2 h-10">
+                            <button
+                                class="text-gray-400 hover:text-sky-100 hover:bg-sky-500 transition border-r border-gray-300">
+                                <x-phosphor-pencil-line-duotone class="inline-block w-5 h-5"/>
+                            </button>
+                            <button
+                                class="text-gray-400 hover:text-red-100 hover:bg-red-500 transition">
+                                <x-phosphor-trash-duotone class="inline-block w-5 h-5"/>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6" class="border-t border-gray-300 p-4 text-center text-gray-500">
+                        <div class="font-bold italic text-sky-800">No records found</div>
+                    </td>
+                </tr>
+            @endforelse
             </tbody>
         </table>
+        <div class="my-4">{{ $records->links() }}</div>
     </x-tmk.section>
 
     {{-- Modal for add and update record --}}
