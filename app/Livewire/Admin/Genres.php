@@ -97,4 +97,14 @@ class Genres extends Component
             'html' => "The genre <b><i>{$oldName}</i></b> has been updated to <b><i>{$genre->name}</i></b>",
         ]);
     }
+
+    // delete a genre
+    public function delete(Genre $genre)
+    {
+        $genre->delete();
+        $this->dispatch('swal:toast', [
+            'background' => 'success',
+            'html' => "The genre <b><i>{$genre->name}</i></b> has been deleted",
+        ]);
+    }
 }

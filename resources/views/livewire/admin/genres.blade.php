@@ -98,6 +98,8 @@
                                     wire:click="edit({{ $genre->id }})"
                                     class="w-5 text-gray-300 hover:text-green-600"/>
                                 <x-phosphor-trash-duotone
+                                    wire:click="delete({{ $genre->id }})"
+                                    wire:confirm="Are you sure you want to delete this genre?"
                                     class="w-5 text-gray-300 hover:text-red-600"/>
                             </div>
                         @endif
