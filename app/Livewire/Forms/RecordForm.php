@@ -81,6 +81,7 @@ class RecordForm extends Form
     public function delete(Record $record)
     {
         $record->delete();
+        Storage::disk('public')->delete('covers/' . $record->mb_id . '.jpg');
     }
 
     // get artist, title and cover from the MusicBrainz API
