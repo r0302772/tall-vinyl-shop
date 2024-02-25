@@ -61,6 +61,7 @@ class Records extends Component
 
     public function getDataFromMusicbrainzApi()
     {
+        $this->validateOnly('form.mb_id');
         $this->form->getArtistRecord();
     }
 
@@ -71,6 +72,24 @@ class Records extends Component
         $this->dispatch('swal:toast', [
             'background' => 'success',
             'html' => "The record <b><i>{$this->form->title}</i></b> has been added",
+            'icon' => 'success',
+        ]);
+    }
+
+    public function editRecord(Record $record)
+    {
+        $this->resetErrorBag();
+        $this->form->fill($record);
+        $this->showModal = true;
+    }
+
+    public function updateRecord(Record $record)
+    {
+        $this->form->update($record);
+        $this->showModal = false;
+        $this->dispatch('swal:toast', [
+            'background' => 'success',
+            'html' => "The record <b><i>{$this->form->title}</i></b> from <b><i>{$this->form->artist}</i></b> has been updated",
             'icon' => 'success',
         ]);
     }

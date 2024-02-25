@@ -21,7 +21,7 @@
                            color-on="text-white bg-lime-600"
                            class="w-44 h-auto"/>
         <x-button wire:click="newRecord()">
-        new record
+            new record
         </x-button>
     </x-tmk.section>
 
@@ -58,7 +58,8 @@
             </thead>
             <tbody>
             @forelse($records as $record)
-                <tr class="border-t border-gray-300">
+                <tr wire:key="{{ $record->id }}"
+                    class="border-t border-gray-300">
                     <td>{{ $record->id }}</td>
                     <td>
                         <img src="{{ $record->cover }}"
@@ -75,6 +76,7 @@
                     <td>
                         <div class="border border-gray-300 rounded-md overflow-hidden m-2 grid grid-cols-2 h-10">
                             <button
+                                wire:click="editRecord({{ $record->id }})"
                                 class="text-gray-400 hover:text-sky-100 hover:bg-sky-500 transition border-r border-gray-300">
                                 <x-phosphor-pencil-line-duotone class="inline-block w-5 h-5"/>
                             </button>
@@ -101,7 +103,7 @@
     <x-dialog-modal id="recordModal"
                     wire:model.live="showModal">
         <x-slot name="title">
-            <h2>New record</h2>
+            <h2>{{ is_null($form->id) ? 'New record' : 'Edit record' }}</h2>
         </x-slot>
         <x-slot name="content">
             {{-- error messages --}}
@@ -155,11 +157,18 @@
         </x-slot>
         <x-slot name="footer">
             <x-secondary-button @click="$wire.showModal = false">Cancel</x-secondary-button>
-            <x-tmk.form.button color="success"
-                               disabled="{{ $form->title ? 'false' : 'true' }}"
-                               wire:click="createRecord()"
-                               class="ml-2">Save new record
-            </x-tmk.form.button>
+            @if(is_null($form->id))
+                <x-tmk.form.button color="success"
+                                   disabled="{{ $form->title ? 'false' : 'true' }}"
+                                   wire:click="createRecord()"
+                                   class="ml-2">Save new record
+                </x-tmk.form.button>
+            @else
+                <x-tmk.form.button color="info"
+                                   wire:click="updateRecord({{ $form->id }})"
+                                   class="ml-2">Save changes
+                </x-tmk.form.button>
+            @endif
         </x-slot>
     </x-dialog-modal>
 </div>
