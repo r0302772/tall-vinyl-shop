@@ -62,6 +62,7 @@
                         <button type="submit" class="block w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition">Logout</button>
                     </form>
                     <div class="border-t border-gray-100"></div>
+                    @if(auth()->user()->admin)
                     {{-- admins only --}}
                     <div class="block px-4 py-2 text-xs text-gray-400">Admin</div>
                     <x-dropdown-link href="{{ route('under-construction') }}">Genres</x-dropdown-link>
@@ -69,6 +70,7 @@
                     <x-dropdown-link href="{{ route('under-construction') }}">Covers</x-dropdown-link>
                     <x-dropdown-link href="{{ route('under-construction') }}">Users</x-dropdown-link>
                     <x-dropdown-link href="{{ route('under-construction') }}">Orders</x-dropdown-link>
+                    @endif
                 </x-slot>
             </x-dropdown>
         @endauth

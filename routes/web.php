@@ -23,9 +23,9 @@ Route::get('itunes-basic', ItunesBasic::class)->name('itunes-basic');
 Route::get('itunes-advanced', ItunesAdvanced::class)->name('itunes-advanced');
 Route::view('contact', 'contact')->name('contact');
 Route::view('playground', 'playground')->name('playground');
-Route::get('log-example',\App\Livewire\Log::class)->name('log-example');
+Route::get('log-example', \App\Livewire\Log::class)->name('log-example');
 Route::view('under-construction', 'under-construction')->name('under-construction');
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'admin', 'active'])->prefix('admin')->name('admin.')->group(function () {
     Route::redirect('/', '/admin/records');
     Route::get('records', Demo::class)->name('records');
 });
@@ -34,6 +34,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    'active',
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
