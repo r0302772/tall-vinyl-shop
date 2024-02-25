@@ -93,4 +93,14 @@ class Records extends Component
             'icon' => 'success',
         ]);
     }
+
+    public function deleteRecord(Record $record)
+    {
+        $this->form->delete($record);
+        $this->dispatch('swal:toast', [
+            'background' => 'info',
+            'html' => "The record <b><i>{$record->title}</i></b> from <b><i>{$record->artist}</i></b> has been deleted",
+            'icon' => 'info',
+        ]);
+    }
 }

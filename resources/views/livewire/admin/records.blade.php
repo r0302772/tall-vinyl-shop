@@ -81,6 +81,8 @@
                                 <x-phosphor-pencil-line-duotone class="inline-block w-5 h-5"/>
                             </button>
                             <button
+                                wire:click="deleteRecord({{ $record->id }})"
+                                wire:confirm="Are you sure you want to delete this record?"
                                 class="text-gray-400 hover:text-red-100 hover:bg-red-500 transition">
                                 <x-phosphor-trash-duotone class="inline-block w-5 h-5"/>
                             </button>
