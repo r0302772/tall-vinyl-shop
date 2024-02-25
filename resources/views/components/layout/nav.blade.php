@@ -47,13 +47,13 @@
                 {{-- avatar --}}
                 <x-slot name="trigger">
                     <img class="rounded-full h-8 w-8 cursor-pointer"
-                         src="https://ui-avatars.com/api/?name=Vinyl+Shop"
-                         alt="Vinyl Shop">
+                         src="https://ui-avatars.com/api/?name={{  urlencode(auth()->user()->name) }}"
+                         alt="{{ auth()->user()->name }}">
                 </x-slot>
                 <x-slot name="content">
                     {{-- all users --}}
-                    <div class="block px-4 py-2 text-xs text-gray-400">My Name</div>
-                    <x-dropdown-link href="{{ route('under-construction') }}">Dashboard</x-dropdown-link>
+                    <div class="block px-4 py-2 text-xs text-gray-400">{{ auth()->user()->name }}</div>
+                    <x-dropdown-link href="{{ route('dashboard') }}">Dashboard</x-dropdown-link>
                     <x-dropdown-link href="{{ route('profile.show') }}">Update Profile</x-dropdown-link>
                     <x-dropdown-link href="{{ route('under-construction') }}">Order history</x-dropdown-link>
                     <div class="border-t border-gray-100"></div>
