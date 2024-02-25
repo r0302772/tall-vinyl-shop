@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\Genre;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -99,8 +100,10 @@ class Genres extends Component
     }
 
     // delete a genre
-    public function delete(Genre $genre)
+    #[On('delete-genre')]
+    public function delete($id)
     {
+        $genre = Genre::findOrFail($id);
         $genre->delete();
         $this->dispatch('swal:toast', [
             'background' => 'success',
