@@ -20,8 +20,8 @@
                            text-on="Records without cover"
                            color-on="text-white bg-lime-600"
                            class="w-44 h-auto"/>
-        <x-button>
-            new record
+        <x-button wire:click="newRecord()">
+        new record
         </x-button>
     </x-tmk.section>
 
@@ -101,13 +101,65 @@
     <x-dialog-modal id="recordModal"
                     wire:model.live="showModal">
         <x-slot name="title">
-            <h2>title</h2>
+            <h2>New record</h2>
         </x-slot>
         <x-slot name="content">
-            content
+            {{-- error messages --}}
+            @if ($errors->any())
+                <x-tmk.alert type="danger">
+                    <x-tmk.list>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </x-tmk.list>
+                </x-tmk.alert>
+            @endif
+            {{-- show only if $form->id is empty --}}
+            @if(!$form->id)
+                <form wire:submit="getDataFromMusicbrainzApi()">
+                    <x-label for="mb_id" value="MusicBrainz id"/>
+                    <div class="flex flex-row gap-2 mt-2">
+                        <x-input id="mb_id" type="text" placeholder="MusicBrainz ID"
+                                 wire:model="form.mb_id"
+                                 class="flex-1"/>
+                        <x-button type="submit">
+                            Get Record info
+                        </x-button>
+                    </div>
+                </form>
+            @endif
+            <div class="flex flex-row gap-4 mt-4">
+                <div class="flex-1 flex-col gap-2">
+                    <p class="text-lg font-medium">{!! $form->artist ?? '&nbsp;' !!}</p>
+                    <p class="italic">{!! $form->title ?? '&nbsp;' !!}</p>
+                    <p class="text-sm text-teal-700">{!! $form->mb_id ? 'MusicBrainz id: ' . $form->mb_id : '&nbsp;' !!}</p>
+                    <input type="hidden" wire:model="form.mb_id">
+                    <x-label for="genre_id" value="Genre" class="mt-4"/>
+                    <x-tmk.form.select wire:model="form.genre_id" id="genre_id" class="block mt-1 w-full">
+                        <option value="">Select a genre</option>
+                        @foreach($genres as $genre)
+                            <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                        @endforeach
+                    </x-tmk.form.select>
+                    <x-label for="price" value="Price" class="mt-4"/>
+                    <x-input id="price" type="number" step="0.01"
+                             wire:model="form.price"
+                             class="mt-1 block w-full"/>
+                    <x-label for="stock" value="Stock" class="mt-4"/>
+                    <x-input id="stock" type="number"
+                             wire:model="form.stock"
+                             class="mt-1 block w-full"/>
+                </div>
+                <img src="{{ $form->cover }}" alt="" class="mt-4 w-40 h-40 border border-gray-300 object-cover">
+            </div>
         </x-slot>
         <x-slot name="footer">
             <x-secondary-button @click="$wire.showModal = false">Cancel</x-secondary-button>
+            <x-tmk.form.button color="success"
+                               disabled="{{ $form->title ? 'false' : 'true' }}"
+                               wire:click="createRecord()"
+                               class="ml-2">Save new record
+            </x-tmk.form.button>
         </x-slot>
     </x-dialog-modal>
 </div>

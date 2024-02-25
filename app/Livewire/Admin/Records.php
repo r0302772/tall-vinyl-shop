@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Livewire\Forms\RecordForm;
+use App\Models\Genre;
 use App\Models\Record;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -38,7 +39,9 @@ class Records extends Component
         // paginate the $query
         $records = $query
             ->paginate($this->perPage);
-        return view('livewire.admin.records', compact('records'));
+        // get the genres for the dropdown in the modal
+        $genres = Genre::orderBy('name')->get();
+        return view('livewire.admin.records', compact('records', 'genres'));
     }
 
     // reset the paginator
@@ -47,5 +50,28 @@ class Records extends Component
         // reset if the $search, $noCover, $noStock or $perPage property has changed (updated)
         if (in_array($propertyName, ['search', 'noCover', 'noStock', 'perPage']))
             $this->resetPage();
+    }
+
+    public function newRecord()
+    {
+        $this->form->reset();
+        $this->resetErrorBag();
+        $this->showModal = true;
+    }
+
+    public function getDataFromMusicbrainzApi()
+    {
+        $this->form->getArtistRecord();
+    }
+
+    public function createRecord()
+    {
+        $this->form->create();
+        $this->showModal = false;
+        $this->dispatch('swal:toast', [
+            'background' => 'success',
+            'html' => "The record <b><i>{$this->form->title}</i></b> has been added",
+            'icon' => 'success',
+        ]);
     }
 }

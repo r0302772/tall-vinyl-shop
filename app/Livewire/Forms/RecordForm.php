@@ -3,6 +3,9 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Record;
+use Http;
+use Illuminate\Support\Facades\Storage;
+use Image;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -51,7 +54,8 @@ class RecordForm extends Form
     }
 
     // update the selected record
-    public function update(Record $record) {
+    public function update(Record $record)
+    {
         $this->validate();
         $record->update([
             'stock' => $this->stock,
@@ -64,5 +68,26 @@ class RecordForm extends Form
     public function delete(Record $record)
     {
         $record->delete();
+    }
+
+    // get artist, title and cover from the MusicBrainz API
+    public function getArtistRecord()
+    {
+        $response = Http::get('https://musicbrainz.org/ws/2/release/' . $this->mb_id . '?inc=artists&fmt=json');
+        if ($response->successful()) {
+            $data = $response->json();
+            $this->artist = $data['artist-credit'][0]['artist']['name'];
+            $this->title = $data['title'];
+            if ($data['cover-art-archive']['front']) {
+                $this->cover = 'https://coverartarchive.org/release/' . $this->mb_id . '/front-250.jpg';
+                $originalCover = Image::make($this->cover)->encode('jpg', 75);
+                Storage::disk('public')->put('covers/' . $this->mb_id . '.jpg', $originalCover);
+            }
+        } else {
+            $this->artist = null;
+            $this->title = null;
+            $this->cover = '/storage/covers/no-cover.png';
+            $this->addError('mb_id', 'MusicBrainz id not found');
+        }
     }
 }
