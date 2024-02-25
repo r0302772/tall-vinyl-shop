@@ -65,7 +65,7 @@
                     @if(auth()->user()->admin)
                         {{-- admins only --}}
                         <div class="block px-4 py-2 text-xs text-gray-400">Admin</div>
-                        <x-dropdown-link href="{{ route('under-construction') }}">Genres</x-dropdown-link>
+                        <x-dropdown-link href="{{ route('admin.genres') }}">Genres</x-dropdown-link>
                         <x-dropdown-link href="{{ route('admin.records') }}">Records</x-dropdown-link>
                         <x-dropdown-link href="{{ route('under-construction') }}">Covers</x-dropdown-link>
                         <x-dropdown-link href="{{ route('under-construction') }}">Users</x-dropdown-link>

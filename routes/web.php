@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Admin\Genres;
 use App\Livewire\Demo;
 use App\Livewire\ItunesAdvanced;
 use App\Livewire\ItunesBasic;
@@ -27,6 +28,7 @@ Route::get('log-example', \App\Livewire\Log::class)->name('log-example');
 Route::view('under-construction', 'under-construction')->name('under-construction');
 Route::middleware(['auth', 'admin', 'active'])->prefix('admin')->name('admin.')->group(function () {
     Route::redirect('/', '/admin/records');
+    Route::get('genres', Genres::class)->name('genres');
     Route::get('records', Demo::class)->name('records');
 });
 
