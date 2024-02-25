@@ -59,7 +59,7 @@
             <tbody>
             @forelse($records as $record)
                 <tr wire:key="{{ $record->id }}"
-                    class="border-t border-gray-300">
+                    class="border-t border-gray-300 {{$record->stock > 0 ?: 'bg-red-100'}}">
                     <td>{{ $record->id }}</td>
                     <td>
                         <img src="{{ $record->cover }}"
