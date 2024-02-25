@@ -29,9 +29,9 @@
             </x-tmk.form.select>
             <x-tmk.form.switch
                 class="block mt-1 w-full"
-                color-off="bg-gray-200" color-on="bg-green-500"
-                text-on="Albums" text-off="Songs"
-                wire:model.live="showAlbums"/>
+                color-off="bg-green-500" color-on="bg-gray-200"
+                text-on="Songs" text-off="Albums"
+                wire:model.live="showSongs"/>
         </div>
     </div>
 

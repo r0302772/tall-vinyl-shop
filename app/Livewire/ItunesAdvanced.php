@@ -10,7 +10,7 @@ class ItunesAdvanced extends Component
 {
     public $countryCode = 'be';
     public $resultLimit = 10;
-    public $showAlbums = true;
+    public $showSongs = false;
     public $loading = 'Please wait...';
 
 
@@ -30,7 +30,7 @@ class ItunesAdvanced extends Component
     public function getFeed()
     {
         $url = "https://rss.applemarketingtools.com/api/v2/{$this->countryCode}/music/most-played/{$this->resultLimit}/"
-            . ($this->showAlbums ? 'albums' : 'songs') . ".json";
+            . ($this->showSongs ? 'songs' : 'albums') . ".json";
         $response = Http::get($url)->json();
         // dump($response['feed']);
         return $response['feed'];
