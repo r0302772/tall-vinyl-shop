@@ -122,7 +122,7 @@
                         @endif
                     </td>
                     @if($editGenre['id'] !== $genre->id)
-                        <td
+                        <td wire:click="edit({{ $genre->id }})"
                             class="text-left cursor-pointer">{{ $genre->name }}
                         </td>
                     @else
