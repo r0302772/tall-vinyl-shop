@@ -7,9 +7,12 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Genres extends Component
 {
+    use WithPagination;
+
     // public properties
     public $perPage = 10;
 
