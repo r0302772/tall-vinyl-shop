@@ -81,8 +81,7 @@
                                 <x-phosphor-pencil-line-duotone class="inline-block w-5 h-5"/>
                             </button>
                             <button
-                                wire:click="deleteRecord({{ $record->id }})"
-                                wire:confirm="Are you sure you want to delete this record?"
+                                wire:click="removeRecord({{ $record->id }})"
                                 class="text-gray-400 hover:text-red-100 hover:bg-red-500 transition">
                                 <x-phosphor-trash-duotone class="inline-block w-5 h-5"/>
                             </button>
@@ -173,4 +172,22 @@
             @endif
         </x-slot>
     </x-dialog-modal>
+
+    {{-- Modal for delete record --}}
+    <x-confirmation-modal id="deleteRecord"
+                          wire:model.live="showDeleteModal">
+        <x-slot name="title">
+            <h2>Delete record</h2>
+        </x-slot>
+        <x-slot name="content">
+            <p class="text-sm">Are you sure you want to delete <b>{{$form->title}}</b> by <b>{{$form->artist}}</b>?</p>
+        </x-slot>
+        <x-slot name="footer">
+            <x-secondary-button @click="$wire.showDeleteModal = false">Cancel</x-secondary-button>
+            <x-tmk.form.button color="danger"
+                               wire:click="deleteRecord({{$form->id}})"
+                               class="ml-2">Delete record
+            </x-tmk.form.button>
+        </x-slot>
+    </x-confirmation-modal>
 </div>

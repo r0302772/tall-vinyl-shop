@@ -20,6 +20,7 @@ class Records extends Component
     public $perPage = 5;
     // show/hide the modal
     public $showModal = false;
+    public $showDeleteModal = false;
 
     public RecordForm $form;
 
@@ -94,8 +95,15 @@ class Records extends Component
         ]);
     }
 
+    public function removeRecord(Record $record): void
+    {
+        $this->form->fill($record);
+        $this->showDeleteModal = true;
+    }
+
     public function deleteRecord(Record $record)
     {
+        $this->showDeleteModal = false;
         $this->form->delete($record);
         $this->dispatch('swal:toast', [
             'background' => 'info',
