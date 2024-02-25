@@ -48,6 +48,7 @@
     </x-tmk.section>
 
     <x-tmk.section>
+        <div class="my-4">{{ $genres->links() }}</div>
         <table class="text-center w-full border border-gray-300">
             <colgroup>
                 <col class="w-14">
@@ -83,6 +84,15 @@
                             {{$orderAsc ?: 'rotate-180'}}
                             {{$orderBy === 'name' ? 'inline-block' : 'hidden'}}
                     "/>
+                </th>
+                <th class="flex justify-end">
+                    <x-tmk.form.select id="perPage"
+                                       wire:model.live="perPage"
+                                       class="mt-1">
+                        @foreach ([5,10,15,20] as $value)
+                            <option value="{{ $value }}">{{ $value }}</option>
+                        @endforeach
+                    </x-tmk.form.select>
                 </th>
             </tr>
             </thead>
@@ -127,7 +137,7 @@
                         </td>
                     @else
                         <td>
-                            <div class="relative text-left w-64">
+                            <div class="relative text-left w-48">
                                 <x-input id="edit_{{ $genre->id }}" type="text"
                                          x-init="$el.focus()"
                                          @keydown.enter="$el.setAttribute('disabled', true);"
@@ -137,7 +147,7 @@
                                          wire:keydown.enter="update({{ $genre->id }})"
                                          wire:keydown.tab="update({{ $genre->id }})"
                                          wire:keydown.escape="resetValues()"
-                                         class="w-64"/>
+                                         class="w-48"/>
                                 <x-phosphor-arrows-clockwise
                                     wire:loading
                                     wire:target="update"
@@ -150,5 +160,6 @@
             @endforeach
             </tbody>
         </table>
+        <div class="my-4">{{ $genres->links() }}</div>
     </x-tmk.section>
 </div>

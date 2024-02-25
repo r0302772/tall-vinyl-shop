@@ -10,6 +10,9 @@ use Livewire\Component;
 
 class Genres extends Component
 {
+    // public properties
+    public $perPage = 10;
+
     // sort properties
     public $orderBy = 'name';
     public $orderAsc = true;
@@ -31,7 +34,7 @@ class Genres extends Component
     {
         $genres = Genre::withCount('records')
             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
-            ->get();
+            ->paginate($this->perPage);
         return view('livewire.admin.genres', compact('genres'));
     }
 
@@ -81,9 +84,10 @@ class Genres extends Component
     // update the genre
     public function update(Genre $genre)
     {
+        sleep(2);
         $this->editGenre['name'] = trim($this->editGenre['name']);
         // if the name is not changed, do nothing
-        if(strtolower($this->editGenre['name']) === strtolower($genre->name)) {
+        if (strtolower($this->editGenre['name']) === strtolower($genre->name)) {
             $this->resetValues();
             return;
         }
