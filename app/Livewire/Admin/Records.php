@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Livewire\Forms\RecordForm;
 use App\Models\Record;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -18,6 +19,8 @@ class Records extends Component
     public $perPage = 5;
     // show/hide the modal
     public $showModal = false;
+
+    public RecordForm $form;
 
     #[Layout('layouts.vinylshop', ['title' => 'Records', 'description' => 'Manage the records of your vinyl records',])]
     public function render()
