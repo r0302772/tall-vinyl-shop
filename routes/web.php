@@ -1,6 +1,8 @@
 <?php
 
 use App\Livewire\Demo;
+use App\Livewire\ItunesAdvanced;
+use App\Livewire\ItunesBasic;
 use App\Livewire\Shop;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');;
 Route::get('shop', Shop::class)->name('shop');
+Route::get('itunes-basic', ItunesBasic::class)->name('itunes-basic');
+Route::get('itunes-advanced', ItunesAdvanced::class)->name('itunes-advanced');
 Route::view('contact', 'contact')->name('contact');
 Route::view('playground', 'playground')->name('playground');
 Route::get('log-example',\App\Livewire\Log::class)->name('log-example');

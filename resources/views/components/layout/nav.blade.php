@@ -11,6 +11,17 @@
         <x-nav-link href="{{ route('shop') }}" :active="request()->routeIs('shop')">
             Shop
         </x-nav-link>
+        <x-dropdown align="left" width="48">
+            <x-slot name="trigger">
+                <x-nav-link class="cursor-pointer">
+                    iTunes
+                </x-nav-link>
+            </x-slot>
+            <x-slot name="content">
+                <x-dropdown-link href="{{ route('itunes-basic') }}">Basic</x-dropdown-link>
+                <x-dropdown-link href="{{ route('itunes-advanced') }}">Advanced</x-dropdown-link>
+            </x-slot>
+        </x-dropdown>
         <x-nav-link href="{{ route('contact') }}" :active="request()->routeIs('contact')">
             Contact
         </x-nav-link>
