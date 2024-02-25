@@ -85,20 +85,40 @@
             </thead>
             <tbody>
             @foreach($genres as $genre)
-                <tr class="border-t border-gray-300 [&>td]:p-2">
+                <tr
+                    wire:key="genre-{{ $genre->id }}"
+                    class="border-t border-gray-300 [&>td]:p-2">
                     <td>{{ $genre->id }}</td>
                     <td>{{ $genre->records_count }}</td>
                     <td>
-                        <div class="flex gap-1 justify-center [&>*]:cursor-pointer [&>*]:outline-0 [&>*]:transition">
-                            <x-phosphor-pencil-line-duotone
-                                class="w-5 text-gray-300 hover:text-green-600"/>
-                            <x-phosphor-trash-duotone
-                                class="w-5 text-gray-300 hover:text-red-600"/>
-                        </div>
+                        @if($editGenre['id'] !== $genre->id)
+                            <div
+                                class="flex gap-1 justify-center [&>*]:cursor-pointer [&>*]:outline-0 [&>*]:transition">
+                                <x-phosphor-pencil-line-duotone
+                                    wire:click="edit({{ $genre->id }})"
+                                    class="w-5 text-gray-300 hover:text-green-600"/>
+                                <x-phosphor-trash-duotone
+                                    class="w-5 text-gray-300 hover:text-red-600"/>
+                            </div>
+                        @endif
                     </td>
-                    <td
-                        class="text-left cursor-pointer">{{ $genre->name }}
-                    </td>
+                    @if($editGenre['id'] !== $genre->id)
+                        <td
+                            class="text-left cursor-pointer">{{ $genre->name }}
+                        </td>
+                    @else
+                        <td>
+                            <div class="flex flex-col text-left">
+                                <x-input id="edit_{{ $genre->id }}" type="text"
+                                         wire:model="editGenre.name"
+                                         wire:keydown.enter="update({{ $genre->id }})"
+                                         wire:keydown.tab="update({{ $genre->id }})"
+                                         wire:keydown.escape="resetValues()"
+                                         class="w-48"/>
+                                <x-input-error for="editGenre.name" class="mt-2"/>
+                            </div>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>
